@@ -4,3 +4,257 @@
 *:after {
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 400px){
+  body{
+      flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .delorean{
+      display: flex;
+      flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .car{
+      display: flex;
+      flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .mainbox{
+      display: flex;
+      flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .left{
+      display: flex;
+      flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .right{
+      display: flex;
+      flex-direction: column;
+  }
+}
+
+.cars nav{
+  font-size: 2em;
+  background-color: #8d8d8d;
+}
+
+.cars nav ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.cars nav ul li{
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.cars nav ul li:hover{
+  background-color: #4c96d7;
+}
+
+.delorean{
+  color:blue;
+}
+
+.grid{
+  display: grid;
+}
+
+.mainbox{
+  display: flex;
+}
+
+.left{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.right{
+  justify-content: flex-end;
+  
+}
+
+.upgrade1{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.upgrade2{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.register{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+    
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+
+}
+
+.cars{
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
+
+.classification{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
+/*CNTRL SHIFT R*/
+
+/* BS styles */
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("/phpmotors/images/site/small_check.jpg");
+  font-size: 1.2rem;
+  font-family: "Raleway", sans-serif;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+header a {
+  text-decoration: none;
+}
+
+nav {
+  background-color: #3a3a3a;
+  padding: 0rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+nav a {
+  padding: 0.4rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #4c96d7;
+  color: #3a3a3a;
+}
+
+main {
+  padding: 1rem;
+}
+
+main h1 {
+  font-size: 4vw;
+}
+
+footer {
+  border-top: 4px solid #3a3a3a;
+  display: flex;
+  flex-flow: column wrap;
+  text-align: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  padding: 0.6rem;
+}
+
+footer p {
+  margin: 0.2rem;
+}
+
+.container {
+  width: 90%;
+  margin: 1.6rem auto;
+  border: 4px solid #4c96d7;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.card {
+  margin: 1rem auto;
+  border-radius: 8px;
+  box-shadow: 0 0 20px 8px #d0d0d0;
+  padding: 20px;
+}
+
+.vehicle-management {
+  padding: 20px;
+  max-width: 600px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.garrik{
+  display: flex;
+  justify-content: center;
+}
