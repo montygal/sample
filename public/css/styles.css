@@ -46,6 +46,8 @@
   }
 }
 
+
+
 .cars nav{
   font-size: 2em;
   background-color: #8d8d8d;
@@ -86,6 +88,8 @@
 }
 
 .right{
+  display: flex;
+  flex-direction: column;
   justify-content: flex-end;
   
 }
@@ -170,7 +174,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-image: url("/phpmotors/images/site/small_check.jpg");
+  background-image: url("/images/site/small_check.jpg");
   font-size: 1.2rem;
   font-family: "Raleway", sans-serif;
 }
@@ -190,7 +194,7 @@ header a {
 }
 
 nav {
-  background-color: #3a3a3a;
+  background-color: #464be4;
   padding: 0rem;
   text-align: center;
   display: flex;

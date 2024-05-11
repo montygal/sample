@@ -11,10 +11,6 @@ const app = express()
 const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 
-//INDEX ROUTE
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})
 
 /* ***********************
  VIEW ENGINE AND TEMPLATES
@@ -28,7 +24,10 @@ app.set("layout", "./layouts/layout") //not at views root
  * Routes
  *************************/
 app.use(static)
-
+//Index Route
+app.get("/", function(req, res){
+    res.render("index", {title: "Home"})
+})
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
