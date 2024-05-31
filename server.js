@@ -10,7 +10,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
-
+const baseController = require("./controllers/baseController")
 
 /* ***********************
  VIEW ENGINE AND TEMPLATES
@@ -25,9 +25,17 @@ app.set("layout", "./layouts/layout") //not at views root
  *************************/
 app.use(static)
 //Index Route
-app.get("/", function(req, res){
-    res.render("index", {title: "Home"})
-})
+app.get("/", baseController.buildHome)
+/*The new code uses the imported 
+"baseController" to "call" the "buildHome" method.
+This will execute the function in the controller, 
+build the navigation bar and pass it and the title 
+name-value pair to the index.ejs view, which will 
+then be sent to the client.*/
+app.use("/inv", inventoryRoute)
+
+
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file

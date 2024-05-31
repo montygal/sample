@@ -1,0 +1,9 @@
+The flow of the M-V-C for our application runs something like this, so far:
+
+A client types or clicks a link containing the index route of our application.
+That triggers a request to our server.js page.
+The route is found in the page, which calls the function in the baseController file.
+The controller calls the getNav function and awaits the result to be returned.
+When the finished string is returned, it is stored in the nav variable.
+The controller, then tells Express and EJS to send the index.ejs file back to the client, and send the nav string and title name-value pair along with it. These items will be used in the head.ejs and navigation.ejs partials.
+The server builds the finished home page and sends it to the browser.
