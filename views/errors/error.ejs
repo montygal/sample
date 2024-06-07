@@ -1,0 +1,9 @@
+<%# The title describes the content of the view%>
+
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%# messages() %>
