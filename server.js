@@ -11,8 +11,11 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-
+const inventoryRoute = require("./routes/inventoryRoute.js")
+const utilities = require("./utilities/")
+const pool = require("./database/index")
 /* ***********************
+
  * View Engine and Templates
  *************************/
 
@@ -23,11 +26,17 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
+//This code uses the imported baseController to "call" the buildHome method
+//This will execute the function in the controller, build the navigation and pass it to index.ejs view
+app.get("/", utilities.handleErrors(baseController.buildHome))
+
 app.use(static)
 //Index route
 //This code uses the imported baseController to "call" the buildHome method
 //This will execute the function in the controller, build the navigation and pass it to index.ejs view
 app.get("/", baseController.buildHome)
+/*Inventory route*/
+app.use("/inv", inventoryRoute)
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
