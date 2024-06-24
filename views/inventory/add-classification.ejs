@@ -1,0 +1,27 @@
+<hi><%- messages() %></hi>
+<body>
+    <div class="vehicle`">
+    <form action="/inventory/add-classicfication" method="post">
+        <label for="cars">Choose a car:</label>
+        <select id="cars" name="cars">
+          <option value="chevy">Chevy</option>
+          <option value="batmobile">Bat Mobile</option>
+          <option value="fbi">FBI</option>
+          <option value="dog">Dog</option>
+          <option value="jeep">Jeep</option>
+          <option value="lamborghini">Lamborghini</option>
+          <option value="aerocar">Aerocar International</option>
+          <option value="monster">Monster</option>
+          <option value="cadillac">Cadillac</option>
+          <option value="gm">GM</option>
+          <option value="mechanic">Mechanic</option>
+          <option value="ford">Ford</option>
+          <option value="mystery">Mystery</option>
+          <option value="spartan">Spartan</option>
+        </select>
+        <span>The classification cannot have spaces or special characters.</span>
+        <input type="submit" value="Add classification">
+        <input type="hidden" name="action" value="vehicle">
+    </form>
+    </div>
+</body>

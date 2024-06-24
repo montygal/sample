@@ -16,6 +16,8 @@ const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute.js")
+const accountController = require("./controllers/accountController")
+const bodyParser = require("body-parser")
 
 
 /* ***********************
@@ -32,6 +34,9 @@ app.use(session({
   name: 'sessionId',
 }))
 
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
@@ -53,6 +58,7 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
+
 //This code uses the imported baseController to "call" the buildHome method
 //This will execute the function in the controller, build the navigation and pass it to index.ejs view
 app.get("/", utilities.handleErrors(baseController.buildHome))
@@ -62,10 +68,16 @@ app.use(static)
 //This code uses the imported baseController to "call" the buildHome method
 //This will execute the function in the controller, build the navigation and pass it to index.ejs view
 app.get("/", baseController.buildHome)
+
+
+
 /*Inventory route*/
 app.use("/inv", inventoryRoute)
-/*Account Route*/
-app.use("/inv", accountRoute)
+
+// *Account Route*/
+app.use("/account", accountRoute)
+
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file

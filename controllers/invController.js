@@ -1,5 +1,7 @@
-const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const invModel = require("../models/inventory-model")
+
+
 
 const invCont = {}
 
@@ -20,7 +22,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
-invCont.buildByInvId = async function (req, res, next){
+invCont.buildByInvId = async function (req, res, next) {
   const inv_id = req.params.invId
   const data = await invModel.getInventoryByInventoryId(inv_id)
   const block = await utilities.buildSingleInventory(data)
@@ -33,5 +35,66 @@ invCont.buildByInvId = async function (req, res, next){
     block,
   })
 }
+
+
+
+/* ****************************************
+ *  Deliver management view
+ * *************************************** */
+invCont.management = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/management", {
+    title: "management",
+    nav,
+  })
+}
+
+//   /* ****************************************
+// *  Deliver add-classification view
+// * *************************************** */
+invCont.addClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/add-classification", {
+    title: "add-classification",
+    nav,
+  })
+}
+
+
+// /* ****************************************
+// *  Process add-inventory
+// * *************************************** */
+invCont.addInventory = async function (req, res) {
+  let nav = await utilities.getNav()
+  const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_color, classification_id } = req.body
+  const result = await invModel.addInventory(
+    inv_make, 
+    inv_model, 
+    inv_year, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail,  
+    inv_price, 
+    inv_color, 
+    classification_id
+  )
+
+  if (result) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve added a vehicle!`
+    )
+
+  } else {
+    req.flash("notice", "Sorry, the vehicle addition failed.")
+    res.status(501).render("inventory/add-inventory", {
+      title: "add-inventory",
+      nav,
+    })
+  }
+}
+
+
+
 
 module.exports = invCont
