@@ -7,3 +7,25 @@ The controller calls the getNav function and awaits the result to be returned.
 When the finished string is returned, it is stored in the nav variable.
 The controller, then tells Express and EJS to send the index.ejs file back to the client, and send the nav string and title name-value pair along with it. These items will be used in the head.ejs and navigation.ejs partials.
 The server builds the finished home page and sends it to the browser.
+
+
+          <option value="chevy">Chevy</option>
+          <option value="batmobile">Bat Mobile</option>
+          <option value="fbi">FBI</option>
+          <option value="dog">Dog</option>
+          <option value="jeep">Jeep</option>
+          <option value="lamborghini">Lamborghini</option>
+          <option value="aerocar">Aerocar International</option>
+          <option value="monster">Monster</option>
+          <option value="cadillac">Cadillac</option>
+          <option value="gm">GM</option>
+          <option value="mechanic">Mechanic</option>
+          <option value="ford">Ford</option>
+          <option value="mystery">Mystery</option>
+          <option value="spartan">Spartan</option>
+        </select>
+        <span>The classification cannot have spaces or special characters.</span>
+        <input type="submit" value="Add classification">
+        <input type="hidden" name="action" value="vehicle">
+    </form>
+    </div>

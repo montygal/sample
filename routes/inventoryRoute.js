@@ -1,34 +1,40 @@
 // Needed Resources 
 const express = require("express")
-const router = new express.Router() 
+const router = new express.Router()
 const invController = require("../controllers/invController")
-const regValidate = require('../utilities/account-validation')
 const Util = require("../utilities")
-const accountController = require("../controllers/accountController")
-const invCont = require("../controllers/invController")
-
+const validate = require('../utilities/inventory-validation')
 
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildByInvId);
 
+//Route to Get Management View
+router.get("/management", Util.handleErrors(invController.management));
+
+//Route to Add Inventory
+router.get("/add-inventory", Util.handleErrors(invController.addInventory));
+
+//Route to Add Classification
+router.get("/add-classification", Util.handleErrors(invController.addClassification));
 
 
+//Route to Process New Classification
+router.post('/add-classification', Util.handleErrors(invController.classification))
+router.post("/add-classification",
+    validate.classificationRules(),
+    validate.checkClassificationData,
+    Util.handleErrors(invController.classification)
+)
 
 
-// Route to build inventory by classification view
-// router.get("/add-classification")
-// router.get("/add-inventory")
-router.get("/management", invController.management);
-router.get("/add-classification", invController.addClassification);
-router.get("/add-inventory", invController.addInventory);
-// router.post('/buildVehicle', Util.handleErrors(invController.buildVehicle))
-// router.get("/login", Util.handleErrors(accountController.buildLogin))
-// router.get("/register", Util.handleErrors(accountController.buildRegister))
-
-// router.post(
-//     "/addVehicle",
+// //Route to Adding and Processing New Vehicles
+// router.post("/add-vehicle",
+//     validate.addVehicleRules,
+//     validate.checkVehicleData,
 //     Util.handleErrors(invController.addVehicle)
-//   )
+//     )
+
+
 module.exports = router

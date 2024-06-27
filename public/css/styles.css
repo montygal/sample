@@ -144,8 +144,27 @@ input[type=password] {
   border-radius: 5px;
   background-color: rgb(108, 108, 213);
   padding: 20px;
-
 }
+
+.addClassification{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
+
+
+.addInventory{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
+
 
 .cars{
   display: flex;
