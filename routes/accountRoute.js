@@ -18,5 +18,13 @@ router.post(
     regValidate.checkRegData,
     Util.handleErrors(accountController.registerAccount)
   )
+
+// // Process the login request
+// router.post(
+//   "/login",
+//   regValidate.loginRules(),
+//   regValidate.checkLoginData,
+//   utilities.handleErrors(accountController.accountLogin)
+// )
   
 module.exports = router

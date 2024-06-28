@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+// const cookieParser = require("cookie-parser")
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
@@ -45,7 +46,7 @@ app.use(function(req, res, next){
 })
 
 
-
+// app.use(cookieParser())
 /* ***********************
 
  * View Engine and Templates

@@ -69,76 +69,80 @@ invCont.addInventory = async function (req, res, next) {
 }
 
 
-//Add Classifications
-invCont.classification = async function (req, res, next) {
+invCont.classification = async function (req, res) {
+  let nav = await utilities.getNav()
   const {
     classification_name
   } = req.body
-  const result = await invModel.classification(classification_name)
-  let nav = await utilities.getNav()
+
+  const result = await invModel.classification(
+    classification_name
+  )
+
   if (result) {
     req.flash(
       "notice",
-      `Classification ${classification_name} was successfully added.`)
-    res.status(201).render("inventory/add-classification"), {
-      nav,
-      errors: null,
-    }
-  } else {
-    req.flash("notice", "Sorry, the classification addition failed.")
+      `Congratulations, you\'ve added ${classification_name}.`
+    )
     res.status(201).render("inventory/add-classification", {
       title: "classification",
       nav,
     })
- }
+  } else {
+    req.flash("notice", "Sorry, the classification addition failed.")
+    res.status(501).render("inventory/add-classification", {
+      title: "classification",
+      nav,
+    })
+  }
 }
 
 
-// //Add Vehicle to Database
-// invCont.addVehicle = async function (req, res, next) {
-//   let nav = await utilities.getNav()
-//   const {
-//     classification_id,
-//     inv_make,
-//     inv_model,
-//     inv_description,
-//     inv_image,
-//     inv_thumbnail,
-//     inv_price,
-//     inv_year,
-//     inv_miles,
-//     inv_color
-//   } = req.body
-//   console.log(inv_price);
-//   const result = await invModel.addVehicle(
-//     classification_id,
-//     inv_make,
-//     inv_model,
-//     inv_description,
-//     inv_image,
-//     inv_thumbnail,
-//     inv_price,
-//     inv_year,
-//     inv_miles,
-//     inv_color)
-//   let addVehicle = await utilities.buildClassificationList()
-//   if (result) {
-//     req.flash(
-//       "notice",
-//       `Vehicle ${vehicle_make} ${vehicle_model} was successfully added.`)
-//     res.status(201).render("inventory/management"), {
-//       nav,
-//       errors: null,
-//     }
-//   } else {
-//     req.flash("notice",
-//       "Sorry, the vehicle addition failed.")
-//     res.status(201).render("inventory/management", {
-//       title: "Add Vehicle",
-//       nav,
-//     })
-//   }
-// }
+//Add Vehicle to Database
+invCont.addVehicle = async function (req, res) {
+  let nav = await utilities.getNav()
+  const {
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color
+  } = req.body
+  console.log(inv_price);
+  const result = await invModel.addVehicle(
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color)
+
+  if (result) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve added ${inv_make}, ${inv_model}.`
+    )
+    res.status(201).render("inventory/add-inventory", {
+      title: "Inventory",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Sorry, the inventory addition failed.")
+    res.status(501).render("inventory/add-inventory", {
+      title: "Inventory",
+      nav,
+    })
+  }
+}
 
 
 

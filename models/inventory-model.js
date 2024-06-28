@@ -57,14 +57,14 @@ async function classification(classification_name){
 /* *****************************
  *  Add Inventory
  * *************************** */
-// async function addVehicle(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_color, classification_id) {
-//   try {
-//     const sql = "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_price, inv_color, classification_id)VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, 'inventory') RETURNING *"
-//     return await pool.query(sql, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_color, classification_id)
-//   } catch (error) {
-//     return error.message
-//   }
-// }
+async function addVehicle(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_color, classification_id) {
+  try {
+    const sql = "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_price, inv_color, classification_id)VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, 'inventory') RETURNING *"
+    return await pool.query(sql, [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_color, classification_id])
+  } catch (error) {
+    return error.message
+  }
+}
 
 
 
@@ -73,7 +73,7 @@ async function classification(classification_name){
 module.exports = {
   getInventoryByClassificationId,
   getInventoryByInventoryId,
-  // addVehicle,
+  addVehicle,
   classification,
   getClassifications
 };

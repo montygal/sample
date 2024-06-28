@@ -21,20 +21,19 @@ router.get("/add-classification", Util.handleErrors(invController.addClassificat
 
 
 //Route to Process New Classification
-router.post('/add-classification', Util.handleErrors(invController.classification))
-router.post("/add-classification",
+router.post('/add-classification', 
     validate.classificationRules(),
     validate.checkClassificationData,
     Util.handleErrors(invController.classification)
 )
 
 
-// //Route to Adding and Processing New Vehicles
-// router.post("/add-vehicle",
-//     validate.addVehicleRules,
-//     validate.checkVehicleData,
-//     Util.handleErrors(invController.addVehicle)
-//     )
+router.post('/add-inventory',
+    // validate.addVehicleRules(),
+    // validate.checkVehicleData,
+    Util.handleErrors(invController.addVehicle)
+)
+
 
 
 module.exports = router
