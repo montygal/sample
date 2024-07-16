@@ -70,6 +70,16 @@ invCont.addInventory = async function (req, res, next) {
   })
 }
 
+//Deliver Reviews View
+invCont.reviews = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/reviews", {
+    title: "Add Reviews",
+    nav,
+  })
+}
+
+
 
 invCont.classification = async function (req, res) {
   let nav = await utilities.getNav()
@@ -210,7 +220,7 @@ invCont.updateInventory = async function (req, res, next) {
     classification_id,
   } = req.body
   const updateResult = await invModel.updateInventory(
-    inv_id,  
+    inv_id,
     inv_make,
     inv_model,
     inv_description,
@@ -232,32 +242,32 @@ invCont.updateInventory = async function (req, res, next) {
     const itemName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the insert failed.")
     res.status(501).render("inventory/edit-vehicle", {
-    title: "Edit " + itemName,
-    nav,
-    classificationSelect: classificationList,
-    errors: null,
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect: classificationList,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
     })
   }
 }
 
 //Delete Confirmation View
-invCont.deleteVehicleConfirm = async function(res, req, next){
+invCont.deleteVehicleConfirm = async function (res, req, next) {
   const inv_id = req.params.invId
   const data = await invModel.getInventoryByInventoryId(inv_id)
   let nav = await utilities.getNav()
   const title = data.inv_make + " " + data.inv_model
-  res.render("./inventory/delete-confirm",{
+  res.render("./inventory/delete-confirm", {
     title: "Delete" + title,
     nav,
     data,
@@ -274,8 +284,8 @@ invCont.deleteVehicleConfirm = async function(res, req, next){
 invCont.deleteVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
   const inv_id = parseInt(req.params.inv_id)
-  const result = await invModel.deleteInventory(inv_id,)
-    
+  const result = await invModel.deleteInventory(inv_id, )
+
 
   if (result) {
     req.flash("notice", `The vehicle was successfully deleted.`)
@@ -285,24 +295,57 @@ invCont.deleteVehicle = async function (req, res, next) {
     const itemName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the insert failed.")
     res.status(501).render("inventory/edit-vehicle", {
-    title: "Edit " + itemName,
-    nav,
-    classificationSelect: classificationList,
-    errors: null,
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect: classificationList,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
     })
   }
 }
 
+// //Add Review to Database
+// invCont.addReview = async function (req, res) {
+//   let nav = await utilities.getNav()
+//   const {
+//     review_id,
+//     review_text,
+//     review_date,
+//     inv_id,
+//     account_id
+//   } = req.body
+//   const result = await invModel.addReviews(
+//     review_id,
+//     review_text,
+//     review_date,
+//     inv_id,
+//     account_id)
 
+//   if (result) {
+//     req.flash(
+//       "notice",
+//       `Congratulations, you\'ve added a review!`
+//     )
+//     res.status(201).render("account/login", {
+//       title: "Review",
+//       nav,
+//     })
+//   } else {
+//     req.flash("notice", "Sorry, the review addition failed.")
+//     res.status(501).render("inventory/reviews", {
+//       title: "Reviews",
+//       nav,
+//     })
+//   }
+// }
 module.exports = invCont

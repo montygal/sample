@@ -183,6 +183,24 @@ input[type=password] {
   padding: 20px;
 }
 
+.reviews{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
+
+
+.delete-reviews{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
 
 .edit{
   display: flex;

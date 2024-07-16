@@ -33,6 +33,13 @@ router.post('/add-classification',
     Util.handleErrors(invController.classification)
 )
 
+// //Route to Process Reviews
+// router.post('/reviews', 
+//     // validate.classificationRules(),
+//     // validate.checkClassificationData,
+//     Util.handleErrors(invController.addReview)
+// )
+
 
 router.post('/add-inventory',
     // validate.addVehicleRules(),
@@ -44,5 +51,8 @@ router.post("/edit-vehicle/", Util.handleErrors(invController.updateInventory))
 
 router.get("/delete/:invId", Util.handleErrors(invController.deleteVehicleConfirm))
 router.post("/deleteVehicle", Util.handleErrors(invController.deleteVehicle))
+
+//Route to get Reviews
+router.get("/reviews", Util.handleErrors(invController.reviews));
 
 module.exports = router

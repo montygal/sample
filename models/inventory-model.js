@@ -1,3 +1,4 @@
+const { reviews } = require("../controllers/invController")
 const pool = require("../database/")
 
 /* ***************************
@@ -103,7 +104,17 @@ async function updateInventory(
     console.error("model error: " + error)
   }
 }
-
+/* *****************************
+ *  Add a Review
+ * *************************** */
+// async function addReviews(){
+//   try {
+//     const sql = "INSERT INTO reviews (review_id, review_text, review_date, inv_id, account_id) VALUES ($1, $2, $3, $4, $5) RETURNING *"
+//     return await pool.query(sql, [reviews])
+//   } catch (error) {
+//     return error.message
+//   }
+// }
 
 
 module.exports = {
@@ -113,4 +124,5 @@ module.exports = {
   classification,
   getClassifications,
   updateInventory
+  // addReviews
 };
