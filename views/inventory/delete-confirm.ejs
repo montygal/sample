@@ -1,0 +1,19 @@
+<hi><%- messages() %></hi>
+<body>
+  <div class="delete">
+    <form action="/inv/deleteVehicle" method="post" id="updateForm">
+      <label for="inv_make">Make</label>
+      <input type="text" name="inv_make" id="inv_make" readonly />
+      <label for="inv_model">Model</label>
+      <input type="text" name="inv_model" id="inv_model" readonly />
+      <label for="inv_year">Year</label>
+      <input type="text" name="inv_year" id="inv_year" readonly />
+      <label for="inv_price">Price</label>
+      <input type="text" name="inv_price" id="inv_price" readonly />
+      <input type="submit" value="Delete Vehicle" />
+      <input type="submit" name="submit" value="Delete Vehicle"> />
+      <input type="hidden" name="Delete">
+      <input type="hidden" name="inv_id">
+    </form>
+  </div>
+</body>

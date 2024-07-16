@@ -164,8 +164,34 @@ input[type=password] {
   background-color: rgb(108, 108, 213);
   padding: 20px;
 }
+.update{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
 
 
+.password{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
+
+
+.edit{
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  border-radius: 5px;
+  background-color: rgb(108, 108, 213);
+  padding: 20px;
+}
 .cars{
   display: flex;
   flex-direction: column;

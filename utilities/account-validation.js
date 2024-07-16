@@ -82,6 +82,44 @@ validate.checkRegData = async (req, res, next) => {
   next()
 }
 
-
+// validate.checkVehicleUpdateData = async(req, res, next) => {
+//   const{
+//     inv_id,
+//     inv_make,
+//     inv_model,
+//     inv_description,
+//     inv_thumbnail,
+//     inv_price,
+//     inv_year,
+//     inv_miles,
+//     inv_color,
+//     classification_id,
+//   } = req.body
+// }
+//   let errors = []
+//   errors = validationRules(req)
+//   if(!errors.isEmpty()){
+//     let nav = await utilities.getNav()
+//     const classificationList = await utilities.buildClassificationList(classification_id)
+//     const title = inv_make + " " + inv_model
+//     res.render("inventory/edit-vehicle",{
+//       errors,
+//       title: "Edit" + title,
+//       nav,
+//       classificationList,
+//       inv_id,
+//       inv_make,
+//       inv_model,
+//       inv_description,
+//       inv_thumbnail,
+//       inv_price,
+//       inv_year,
+//       inv_miles,
+//       inv_color,
+//       classification_id
+//     })
+//     return
+//   }
+//   next()
 
 module.exports = validate

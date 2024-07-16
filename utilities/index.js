@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 const invModel = require("../models/inventory-model")
 const Util = {}
 
@@ -26,33 +28,33 @@ Util.getNav = async function (req, res, next) {
 
 
 /* **************************************
-* Build the classification view HTML
-* ************************************ */
-Util.buildClassificationGrid = async function(data){
+ * Build the classification view HTML
+ * ************************************ */
+Util.buildClassificationGrid = async function (data) {
   let grid
-  if(data.length > 0){
+  if (data.length > 0) {
     grid = '<ul id="inv-display">'
-    data.forEach(vehicle => { 
+    data.forEach(vehicle => {
       grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      grid += '<a href="../../inv/detail/' + vehicle.inv_id +
+        '" title="View ' + vehicle.inv_make + ' ' + vehicle.inv_model +
+        'details"><img src="' + vehicle.inv_thumbnail +
+        '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model +
+        ' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
+      grid += '<a href="../../inv/detail/' + vehicle.inv_id + '" title="View ' +
+        vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' +
+        vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
-      grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+      grid += '<span>$' +
+        new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
       grid += '</div>'
       grid += '</li>'
     })
     grid += '</ul>'
-  } else { 
+  } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
@@ -60,29 +62,29 @@ Util.buildClassificationGrid = async function(data){
 
 
 //Krysta helped explain this function for me
-Util.buildSingleInventory = async function(data){
+Util.buildSingleInventory = async function (data) {
   let block
   vehicle = data[0]
-  if (data.length>0){
-      block ='<div id="vehicle-layout" class="single-vehicle-view">'
-      // block += '<section id="vehicle-cta">'
-      // block += '    <img id="vehicle-image" src="'+ vehicle.inv_image+'" alt="'+ vehicle.inv_description +'">'
-      // block += '    '
-      // block += '</section>'
-      block += '<div id="details">'
-      block += '<section id="reviews" class="vehicle-detail">'
-      block += '    <img id="vehicle-image" src="'+ vehicle.inv_image
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model
-      +' on CSE Motors">'
-      block += '</section>'
-      block += '<section id="reviews" class="vehicle-detail">'
-      block += '        <h2>'+vehicle.inv_make+' '+vehicle.inv_model+' Details</h2>  '
-      block += '        <p><b>Price: </b>$' +new Intl.NumberFormat('en-US').format(vehicle.inv_price)+ '</p>'
-      block += '        <p><b>Milage: </b>' +new Intl.NumberFormat('en-US').format(vehicle.inv_miles)+ '</p>'
-      block += '        <p><b>Description: </b>' +vehicle.inv_description+ '</p>'
-      block += '</section>'
+  if (data.length > 0) {
+    block = '<div id="vehicle-layout" class="single-vehicle-view">'
+    // block += '<section id="vehicle-cta">'
+    // block += '    <img id="vehicle-image" src="'+ vehicle.inv_image+'" alt="'+ vehicle.inv_description +'">'
+    // block += '    '
+    // block += '</section>'
+    block += '<div id="details">'
+    block += '<section id="reviews" class="vehicle-detail">'
+    block += '    <img id="vehicle-image" src="' + vehicle.inv_image +
+      '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model +
+      ' on CSE Motors">'
+    block += '</section>'
+    block += '<section id="reviews" class="vehicle-detail">'
+    block += '        <h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details</h2>  '
+    block += '        <p><b>Price: </b>$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</p>'
+    block += '        <p><b>Milage: </b>' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
+    block += '        <p><b>Description: </b>' + vehicle.inv_description + '</p>'
+    block += '</section>'
 
-      block+='</div>'
+    block += '</div>'
   } else {
     block += '<p class="notice">Sorry, we were unable to find this vehicle in our inventory.</p>'
   }
@@ -98,8 +100,8 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 
 /* *****************************
-*  Add Classification
-* *************************** */
+ *  Add Classification
+ * *************************** */
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications()
   let classificationList =
@@ -117,5 +119,42 @@ Util.buildClassificationList = async function (classification_id = null) {
   })
   classificationList += "</select>"
   return classificationList
+}
+
+
+/* ****************************************
+ * Middleware to check token validity
+ **************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      })
+  } else {
+    next()
+  }
+}
+
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
 }
 module.exports = Util

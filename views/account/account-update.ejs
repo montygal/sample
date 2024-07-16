@@ -1,0 +1,45 @@
+<hi><%- messages() %></hi>
+<% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<body>
+    <div class="update">
+      <form action="/account/account-update" method="post">
+        <label for="account_firstname">Update First Name</label>
+        <input
+          type="text"
+          name="update_account_firstname"
+          id="update_account_firstname"
+          required
+        />
+        <label for="update_account_lastname">Update Last Name</label>
+        <input
+          type="text"
+          name="update_account_lastname"
+          id="update_account_lastname"
+          required
+        />
+        <label for="email">Update Email</label>
+        <input type="email" name="update_account_email" id="update_account_email" required />
+        <input type="submit" value="Update" />
+        <input type="hidden" name="action" value="update" />   
+        </form>
+       </div>
+       <form action="/account/account-update" method="post">
+        <div class = 'password'>
+        <label for="update-password">Update Password</label>
+        <span>You are updating your password. Passwords must be at least 12 characters and contain at least 1 number,
+          1 capital letter and 1 special character</span>
+        <input type="update_password" name="update_account_password" id="update_account_password"required
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"/>
+        <input type="submit" value="Update" />
+        <input type="hidden" name="action" value="update_password" />
+      </form>
+    </div>
+  </body>
+  
