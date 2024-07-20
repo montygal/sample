@@ -2,18 +2,11 @@
 <body>
   <div class="delete-reviews">
     <form action="/inv/delete-reviews" method="post" id="Delete reviews">
-      <label for="inv_make">Make</label>
-      <input type="text" name="inv_make" id="inv_make" readonly />
-      <label for="inv_model">Model</label>
-      <input type="text" name="inv_model" id="inv_model" readonly />
-      <label for="inv_year">Year</label>
-      <input type="text" name="inv_year" id="inv_year" readonly />
-      <label for="inv_price">Price</label>
-      <input type="text" name="inv_price" id="inv_price" readonly />
+      <textarea id="reviews" name="reviews" rows="4" cols="30"></textarea>
       <input type="submit" value="Delete Vehicle" />
       <input type="submit" name="submit" value="Delete Vehicle"> />
       <input type="hidden" name="Delete">
-      <input type="hidden" name="inv_id">
+      <input type="hidden" name="review_id">
     </form>
   </div>
 </body>

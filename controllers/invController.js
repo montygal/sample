@@ -80,7 +80,25 @@ invCont.reviews = async function (req, res, next) {
 }
 
 
+//Deliver Delete Reviews View
+invCont.deleteReviews = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/reviews", {
+    title: "Delete Reviews",
+    nav,
+  })
+}
 
+
+
+//Deliver Reviews View
+invCont.updateReviews = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/reviews", {
+    title: "Edit Reviews",
+    nav,
+  })
+}
 invCont.classification = async function (req, res) {
   let nav = await utilities.getNav()
   const {
@@ -315,37 +333,39 @@ invCont.deleteVehicle = async function (req, res, next) {
 }
 
 // //Add Review to Database
-// invCont.addReview = async function (req, res) {
-//   let nav = await utilities.getNav()
-//   const {
-//     review_id,
-//     review_text,
-//     review_date,
-//     inv_id,
-//     account_id
-//   } = req.body
-//   const result = await invModel.addReviews(
-//     review_id,
-//     review_text,
-//     review_date,
-//     inv_id,
-//     account_id)
+invCont.addReview = async function (req, res) {
+  let nav = await utilities.getNav()
+  const {
+    account_firstname,
+    review_id,
+    review_text,
+    review_date,
+    inv_id,
+    account_id
+  } = req.body
+  const result = await invModel.addReviews(
+    account_firstname,
+    review_id,
+    review_text,
+    review_date,
+    inv_id,
+    account_id)
 
-//   if (result) {
-//     req.flash(
-//       "notice",
-//       `Congratulations, you\'ve added a review!`
-//     )
-//     res.status(201).render("account/login", {
-//       title: "Review",
-//       nav,
-//     })
-//   } else {
-//     req.flash("notice", "Sorry, the review addition failed.")
-//     res.status(501).render("inventory/reviews", {
-//       title: "Reviews",
-//       nav,
-//     })
-//   }
-// }
+  if (result) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve added a review!${account_firstname}`
+    )
+    res.status(201).render("account/login", {
+      title: "Review",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Sorry, the review addition failed.")
+    res.status(501).render("inventory/reviews", {
+      title: "Reviews",
+      nav,
+    })
+  }
+}
 module.exports = invCont

@@ -1,0 +1,16 @@
+<hi><%- messages() %></hi>
+<body>
+  <div class="editing">
+    <form action="/inv/review-edit" method="post" id="updateReview">
+      <textarea id="reviews" name="reviews" rows="4" cols="30"></textarea>
+      <input type="submit" value="Modify Review" />
+      <input type="submit" name="submit" value="Modify Review" /> />
+      <input type="submit" value="Delete Vehicle" />
+      <input type="submit" name="submit" value="Delete Review" /> />
+      <input type="hidden" name="inv_id" <% if(locals.inv_id) { % /> value="<%=
+      locals.inv_id %>" <% } %>>
+    </form>
+  </div>
+</body>
+
+<script src="/js/inv-update.js"></script>
